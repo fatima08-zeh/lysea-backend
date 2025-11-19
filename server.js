@@ -16,7 +16,7 @@ origin: process.env.CORS_ORIGIN || "http://localhost:3000",  methods: ["GET", "P
   allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "Accept"],
   credentials: true 
 }));
-// ✅ Middleware pour les pré-requêtes (OPTIONS) pour toutes les routes
+
 app.options("*", (req, res) => {
   res.header("Access-Control-Allow-Origin", "http://localhost:3000");
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
@@ -32,7 +32,7 @@ app.get("/test-cors", (req, res) => {
 });
 
 
-// ✅ Configuration PayPal
+// CFG de PayPal
 if (!process.env.PAYPAL_CLIENT_ID || !process.env.PAYPAL_SECRET) {
   console.error("❌ Clés PayPal manquantes !");
 } else {
@@ -45,11 +45,11 @@ const usersRoutes = require("./routes/users");
 const productsRoutes = require("./routes/products");
 const ordersRoutes = require("./routes/orders");
 const checkoutRoutes = require("./routes/checkout");
-const cartRoutes = require("./routes/cartRoutes"); // ✅ charger le fichier
+const cartRoutes = require("./routes/cartRoutes"); 
 const chatRoutes = require("./routes/chat");
 const newsletterRoutes = require("./routes/newsletter");
 
-// server.js
+// server
 app.get("/api/health", (req,res)=>res.json({ok:true, env:process.env.NODE_ENV||"dev"}));
 
 app.use("/api/newsletter", newsletterRoutes);
@@ -109,7 +109,7 @@ async function createDefaultAdmin() {
       console.error("❌ Erreur lors de la création de l'administrateur par défaut :", error);
   }
 }
-// --- DEBUG OpenAI ---
+
 const OpenAI = require("openai");
 app.post("/api/chat/ping-openai", async (req, res) => {
   try {
