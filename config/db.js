@@ -1,4 +1,4 @@
-const mysql = require("mysql2"); // ✅ Charger le module MySQL2
+const mysql = require("mysql2"); 
 require("dotenv").config();
 
 const db = mysql.createPool({
@@ -6,7 +6,7 @@ const db = mysql.createPool({
     user: "root",
     password: "",
     database: "cosmetiquequebec",
-    port: 3307, // Ajoutez ce champ si ce n'est pas déjà fait
+    port: 3307,
 });
 
 
