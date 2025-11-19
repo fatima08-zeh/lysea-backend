@@ -1,24 +1,22 @@
-const mysql = require("mysql2");
+const mysql = require("mysql2"); // ✅ Charger le module MySQL2
 require("dotenv").config();
 
 const db = mysql.createPool({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  database: process.env.DB_NAME,
-  port: process.env.DB_PORT || 3306,
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0
+    host: "localhost",
+    user: "root",
+    password: "",
+    database: "cosmetiquequebec",
+    port: 3307, // Ajoutez ce champ si ce n'est pas déjà fait
 });
 
+
 db.getConnection((err, connection) => {
-  if (err) {
-    console.error("❌ Erreur MySQL :", err);
-    return;
-  }
-  console.log("✅ Connecté à MySQL !");
-  connection.release();
+    if (err) {
+        console.error("❌ Erreur de connexion à MySQL :", err);
+        return;
+    }
+    console.log("✅ Connecté à la base de données MySQL !");
+    connection.release(); 
 });
 
 module.exports = db;
